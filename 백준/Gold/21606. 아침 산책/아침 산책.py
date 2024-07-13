@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 N = int(input())
 A = input()
 cnt = 0
@@ -28,7 +31,11 @@ def dfs(v) :
         for i in dfs_route[v] :
             if not dfs_visited[i] :
                 dfs(i)
-                cnt += (dfs_value[i]+1) * dfs_value[i] // 2            
+                cnt += (dfs_value[i]+1) * dfs_value[i] // 2
 
-dfs(1)
+for i in range(1,N+1) :
+    if dfs_position[i] == 1 :
+        dfs(i)
+        break
+
 print(cnt*2)
