@@ -1,13 +1,17 @@
+import sys
+input = sys.stdin.readline
 N = int(input())
-stairs = [0]*301
-for i in range(1, N+1) :
-    stairs[i] = int(input())
-
-dp = [0]*301
-dp[1] = stairs[1]
-dp[2] = stairs[1] + stairs[2]
-dp[3] = max(stairs[1] + stairs[3],stairs[2] + stairs[3])
-
-for i in range(4,N+1) :
-    dp[i] = max(stairs[i] + stairs[i-1] + dp[i-3], stairs[i] + dp[i-2])
-print(dp[N])
+dp = [[] for _ in range(N)]
+stair = [0] * N
+for i in range(N) :
+    stair[i] = int(input())
+if N == 1 :
+    print(stair[0])
+else :
+    dp[0] = [stair[0],0]
+    dp[1] = [stair[0]+stair[1],stair[1]]
+    for i in range(2,N) :
+        one_step = dp[i-1][1]+stair[i]
+        two_step = max(dp[i-2])+stair[i]
+        dp[i] = [one_step,two_step]
+    print(max(dp[N-1]))
