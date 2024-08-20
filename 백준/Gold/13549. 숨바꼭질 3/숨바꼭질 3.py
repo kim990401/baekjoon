@@ -7,22 +7,23 @@ visited=[False]*limit
 def bfs(x,end):
     queue=deque()
     queue.append(x)
+    visited[x] = True
 
     while queue:
-        x=queue.popleft()
+        x = queue.popleft()
         if x == end:
             return cnt[x]
-        if -1<x*2<limit and visited[x*2]==0 :
+        if -1 < x*2 < limit and not visited[x*2] :
             queue.appendleft(x*2)
-            cnt[x*2]=cnt[x]
-            visited[x*2]=True
-        if -1<x-1<limit and visited[x-1]==0 :
+            cnt[x*2] = cnt[x]
+            visited[x*2] = True
+        if -1 < x-1 < limit and not visited[x-1] :
             queue.append(x-1)
-            cnt[x-1]=cnt[x]+1
-            visited[x-1]=True
-        if -1<x+1<limit and visited[x+1]==0 :
+            cnt[x-1] = cnt[x]+1
+            visited[x-1] = True
+        if -1 < x+1 < limit and not visited[x+1] :
             queue.append(x+1)
-            cnt[x+1]=cnt[x]+1
-            visited[x+1]=True
+            cnt[x+1] = cnt[x]+1
+            visited[x+1] = True
 
 print(bfs(n,k))
