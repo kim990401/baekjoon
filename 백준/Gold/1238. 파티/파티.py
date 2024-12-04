@@ -1,4 +1,5 @@
 import sys, heapq
+input = sys.stdin.readline
 INF = sys.maxsize
 N, M, X = map(int,input().split())
 route = [[] for _ in range(N+1)]
